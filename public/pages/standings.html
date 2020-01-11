@@ -1,0 +1,52 @@
+<!-- HELPER FUNCTIONS: update page asynchronously -->
+<link rel="stylesheet" href="css/standings.css" />
+
+<div class="row">
+    <div class="col s12 m12">
+        <div class="card brown white-text">
+
+            <div class="card-content" id= "header">
+            </div>
+
+            <div class="row white-text">
+                <div class="col s2 l2">
+                    <a id="championBtn" class="buttonText waves-effect waves-light btn-large red lighten-2" >Champion</a>
+                </div>
+                <div class="col s2 l2">
+                    <a id="premierBtn" class="buttonText waves-effect waves-light btn-large purple lighten-2" > Premier</a>
+                </div>
+                <div class="col s2 l2">
+                    <a id="germanBtn" class="buttonText waves-effect waves-light btn-large indigo lighten-2" >German</a>
+                </div>
+                <div class="col s2 l2">
+                    <a id="dutchBtn" class="buttonText waves-effect waves-light btn-large green lighten-2" >Dutch</a>
+                </div>
+                <div class="col s2 l2">
+                    <a id="spainBtn" class="buttonText waves-effect waves-light btn-large amber lighten-1" >Spain</a>
+                </div>
+
+                <div class="col s2 l2 width:100%;">
+                    <a id="frenchBtn" class="buttonText waves-effect waves-light btn-large brown lighten-2"   >French</a>
+                </div>
+            </div>
+
+            <div class="row teal lighten-2 row white-text standingsHeaderText" d="grid-headers">
+                <div class="col s1 offset-s1"><p>Position</p></div>
+                <div class="col s1"><p>Team</p></div>
+                <div class="col s1"><p>Played Games</p></div>
+                <div class="col s1"><p>Won</p></div>
+                <div class="col s1"><p>Draw</p></div>
+                <div class="col s1"><p>Lost</p></div>
+                <div class="col s1"><p>Points</p></div>
+                <div class="col s1"><p>Goals For</p></div>
+                <div class="col s1"><p>Goals Against</p></div>
+                <div class="col s1"><p>Goals Difference</p></div>
+            </div>
+
+            <div class="row" id="grid-content">
+            </div>
+        </div>
+    </div>
+
+<!--Scripts-->
+<script src="js/standings.js"></script>

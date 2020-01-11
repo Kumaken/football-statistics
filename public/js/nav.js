@@ -1,3 +1,16 @@
+// Helper Funcs:
+// RUN SCRIPTS INJECTED INTO INNER HTML:
+var setInnerHTML = function(elm, html) {
+	elm.innerHTML = html;
+	Array.from(elm.querySelectorAll("script")).forEach( oldScript => {
+		const newScript = document.createElement("script");
+		Array.from(oldScript.attributes)
+		.forEach( attr => newScript.setAttribute(attr.name, attr.value) );
+		newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+		oldScript.parentNode.replaceChild(newScript, oldScript);
+	});
+}
+
 document.addEventListener("DOMContentLoaded", function() {
   // Activate sidebar nav
   var elems = document.querySelectorAll(".sidenav");
@@ -65,10 +78,11 @@ function loadPage(page) {
       } else if (page === "teamDetails") {
         getAndSaveTeams();
 
-        let teamname = new URLSearchParams(new URL(window.location.href).hash.split('?')[1]).get('name')
+        //console.log(window.location.href.split('?')[1].split('#')[0]);
+        let teamname = new URLSearchParams(window.location.href.split('?')[1].split('#')[0]).get('name');
         console.log(teamname);
         if (teamname)
-          searchAndDisplayTeam()
+          searchAndDisplayTeam(teamname)
 
         // var urlParams = new URLSearchParams(window.location.search);
         // var isFromSaved = urlParams.get("saved");
@@ -79,7 +93,9 @@ function loadPage(page) {
       }
 
       if (this.status == 200) {
-        content.innerHTML = xhttp.responseText;
+        document.getElementById("loadingCircle").style.display = "none";
+        setInnerHTML(content, xhttp.responseText);
+        //content.innerHTML = xhttp.responseText;
       } else if (this.status == 404) {
         content.innerHTML = "<p>Halaman tidak ditemukan.</p>";
       } else {

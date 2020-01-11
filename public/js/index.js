@@ -1,63 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Football Statistics</title>
-    <meta name="description" content="Football Statistics" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="css/materialize.min.css" />
-    <link rel="manifest" href="/manifest.json" />
-    <meta name="theme-color" content="#00897B" />
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  </head>
-  <body class="brown darken-4">
-    <!-- Navigasi -->
-    <nav class="teal lighten-1" role="navigation">
-      <div class="nav-wrapper container">
-        <a class="brand-logo" id="logo-container" style="font-size: 3vmin;">Football Statistics</a>
-        <a href="#" class="sidenav-trigger" data-target="nav-mobile">&#9776;</a>
-
-        <ul class="topnav right hide-on-med-and-down"></ul>
-        <ul class="sidenav" id="nav-mobile"></ul>
-      </div>
-    </nav>
-    <!-- Akhir Navigasi -->
-
-    <!-- Preloader -->
-    <style>
-      #loadingCircle{
-        position: absolute;
-        top :0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        margin: auto;
-      }
-    </style>
-
-    <div id="loadingCircle" class="preloader-wrapper big active">
-      <div class="spinner-layer spinner-white-only">
-        <div class="circle-clipper left">
-          <div class="circle"></div>
-        </div><div class="gap-patch">
-          <div class="circle"></div>
-        </div><div class="circle-clipper right">
-          <div class="circle"></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="container brown darken-3" id="body-content"></div>
-
-    <script src="js/materialize.min.js"></script>
-    <script src="js/idb.js"></script>
-    <script src="js/db.js"></script>
-    <script src="js/api.js"></script>
-    <script type="text/javascript" src="js/nav.js"></script>
-    <script src="vapidKey.js"></script>
-
-    <script>
-      // Main Logic:
+// Main Logic:
         // Periksa service worker
         if (!('serviceWorker' in navigator)) {
             console.log("Service worker tidak didukung browser ini.");
@@ -137,9 +78,3 @@
 
       // Preloader logic
       window.onload = function(){ document.getElementById("loadingCircle").style.display = "none" };
-
-    </script>
-
-
-  </body>
-</html>

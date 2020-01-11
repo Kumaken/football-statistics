@@ -1,0 +1,19 @@
+/* Overwrite css materialize text overflow in button behaviour so it fits itself around container size changes */
+.btn-large.waves-effect {
+    height: auto;
+    min-height: 20px;
+    line-height: 20px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-right: 50px;
+}
+
+.buttonText{
+    width:100%;
+    font-size:1vmax;
+}
+
+.standingsHeaderText{
+    font-size: 1vmax;
+    text-align: center;
+}

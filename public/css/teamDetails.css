@@ -1,0 +1,114 @@
+    /* make prefix class for icon to stick on the right side of input field */
+    .input-field .prefix.right{
+        right: 0;
+    }
+
+    .search-button:hover{
+        color : violet !important;
+    }
+
+    .teamname{
+        display: flex;
+        justify-content: center; /* align horizontal */
+        align-items: center; /* align vertical */
+        height: 100%;
+    }
+
+    .team-entry:hover{
+        background-color : violet !important;
+    }
+
+.FAB{
+    visibility: hidden;
+}
+
+#allTeamsBtn{
+    margin-top:3vh;
+    font-size:1.2vh;
+}
+
+.searchText{
+    font-weight: bold;
+    text-align:center;
+}
+
+.teamImageM{
+    display:block;
+    width:10vmax;
+    height:10vmax !important;
+    margin-left:auto;
+    margin-right:auto
+}
+
+.teamName{
+    display:flex;
+    align-items: center;
+    color:white;
+    font-size: 2vh;
+    font-weight: bold;
+    margin:auto;
+    text-align: center;
+}
+
+.teamImageS{
+    display:block;
+    width:3vmax;
+    height:3vmax !important;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+/* Matches Information Table CSS */
+.tableTitle{
+    color:white;
+    font-weight: bold;
+    text-align: center;
+}
+
+.tableContents{
+    font-size: 1.25vmax;
+}
+
+/* Team Information */
+
+.infoEntry{
+    color:white;
+    font-weight: bold;
+    text-align: center;
+}
+
+.teamImageL{
+    display:block;
+    width:13vmax;
+    height:13vmax !important ;
+    margin-left:50%;
+    margin-right:auto;
+}
+
+.entryText{
+    text-align: center
+}
+
+.entryTextB{
+    font-weight: bold; text-align: center
+}
+
+/* Dividers */
+.lineDividerL{
+    width:83%;
+}
+
+.lineDividerS{
+    width:50%;
+}
+/* Error Messages */
+.errorText{
+    color:white;
+    font-weight: bold;
+    text-align: center;
+}
+
+.errorTextLesser{
+    color:white;
+    text-align: center;
+}

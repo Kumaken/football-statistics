@@ -98,6 +98,7 @@ function removeParam(key, sourceURL) {
 }
 
 function saveFavouriteTeam(team) {
+  document.getElementById("loadingCircle").style.display = "initial";
   dbPromised
     .then(function(db) {
       var tx = db.transaction("favTeams", "readwrite");
@@ -114,7 +115,6 @@ function saveFavouriteTeam(team) {
         result[1].put(team);
         M.toast({html: "Team Successfully Favourited!"});
         // because i don't trust urlsearchparams with # urls :(
-        window.location.href = window.location.href+'&saved=true';
         loadPage('teamDetails');
         return result[2].complete;
       }
@@ -122,6 +122,7 @@ function saveFavouriteTeam(team) {
 }
 
 function deleteFavouriteTeam(team) {
+  document.getElementById("loadingCircle").style.display = "initial";
   dbPromised
     .then(function(db) {
       var tx = db.transaction("favTeams", "readwrite");
@@ -138,7 +139,7 @@ function deleteFavouriteTeam(team) {
         result[1].delete(team.name);
         M.toast({html: "Team Successfully Deleted!"});
         // because i don't trust urlsearchparams with # urls :(
-        window.location.href = removeParam('saved', window.location.href);
+        window.location.search = removeParam('saved', window.location.search);
         loadPage('teamDetails');
         return result[2].complete;
       }

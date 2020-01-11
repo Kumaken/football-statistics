@@ -109,11 +109,11 @@ function updateQueryString(key, value){
   window.location.search = searchParams.toString();
 }
 
-function searchAndDisplayTeam() {
+function searchAndDisplayTeam(teamname) {
   // let urlParams = new URLSearchParams(window.location.search);
   // let teamname = urlParams.get('name');
   // console.log(new URL(window.location.href).hash.split('?'));
-  let teamname = new URLSearchParams(new URL(window.location.href).hash.split('?')[1]).get('name')
+  // let teamname = new URLSearchParams(new URL(window.location.href).hash.split('?')[1]).get('name')
   //let teamname =  document.getElementById("search-field").value;
   console.log(teamname);
 
@@ -157,13 +157,13 @@ function displayTeamByNameOrID(name, id){
 function displayTeamSimplified(data, favourite = false){
   let resultHTML = `
   <div class="card brown white-text team-entry">
-    <a onclick="location.href='#teamDetails?name=${encodeURIComponent(data.name)}&id=${data.id}${favourite ? '&saved=true' : ''}'; loadPage('teamDetails'); return false;">
+    <a onclick="location.href='?name=${encodeURIComponent(data.name)}&id=${data.id}${favourite ? '&saved=true' : ''}#teamDetails'; loadPage('teamDetails'); return false;">
       <div class="row" style="height: 10vmax">
         <div class="col s4 offset-s2">
-          <img class="responsive-img" style="display:block; width:10vmax; height:10vmax; margin-left:auto; margin-right:auto;"  src="${ data.crestUrl}">
+          <img class="teamImageM responsive-img" src="${ data.crestUrl}">
         </div>
         <div class="col s4 offset-s2 teamname">
-          <h5 style ="display:flex; align-items: center; color:white; font-size: 2vh; font-weight: bold;  margin:auto; text-align: center;">${data.name.toUpperCase()}  </h5>
+          <h5 class="teamNameM">${data.name.toUpperCase()}</h5>
         </div>
       </div>
     </a>
@@ -217,17 +217,17 @@ function displayMatchesOfTeam(data){
   }
 
   let resultHTML = `
-  <h5 style ="color:white; font-weight: bold; text-align: center;">Matches Information</h5>
+  <h5 class="tableTitle">Matches Information</h5>
 
   <div class="row">
-    <div class="col s10 offset-s1 " style="width:83%;">
+    <div class="lineDivider col s10 offset-s1">
       <hr>
     </div>
   </div>
 
   <div class="row">
-    <div class="col s10 offset-s1 white-text" style="font-size: 1.25vh;">
-      <table class="responsive-table centered striped">
+    <div class="col s10 offset-s1 white-text">
+      <table class="tableContents responsive-table centered striped">
         <thead>
           <tr>
               <th>Competition</th>
@@ -260,7 +260,10 @@ function displayTeam(data){
   console.log(data);
   let resultHTML = ``;
 
-  var isFromSaved = new URLSearchParams(new URL(window.location.href).hash.split('?')[1]).get('saved');
+  // var isFromSaved = new URLSearchParams(new URL(window.location.href.split('?')[1])).get('saved');
+
+  let isFromSaved = new URLSearchParams(window.location.search).get('saved');
+  console.log(isFromSaved);
 
   if(isFromSaved){
     let btnDelete = document.getElementById("delete");
@@ -272,8 +275,8 @@ function displayTeam(data){
 
   if(data == undefined){
     resultHTML += `
-    <h5 style="color:white; font-weight: bold; text-align: center;"> Error in searching!!! </h5>
-    <h6 style="color:white; text-align: center;"> Possible causes may be but not limited to: Database hasn't been initialized because of no internet connection, Wrong team name query (team name has to be precise); e.g.: type in 'Arsenal FC' (case does not matter)</h6>
+    <h5 class="errorText"> Error in searching!!! </h5>
+    <h6 style="errorTextLesser"> Possible causes may be but not limited to: Database hasn't been initialized because of no internet connection, Wrong team name query (team name has to be precise); e.g.: type in 'Arsenal FC' (case does not matter)</h6>
     `
     document.getElementById("grid-content").innerHTML = resultHTML;
     return;
@@ -281,10 +284,10 @@ function displayTeam(data){
   var str = JSON.stringify(data).replace(/http:/g, 'https:');
   data = JSON.parse(str);
 
-  resultHTML +=  `<h4 style ="color:white; font-weight: bold; text-align: center;">${data.name.toUpperCase()}  </h4>
+  resultHTML +=  `<h4 class="infoEntry">${data.name.toUpperCase()}  </h4>
 
   <div class="row">
-    <div class="col s6 offset-s3" style="width:50%;">
+    <div class="col s6 offset-s3 lineDividerS">
       <hr>
     </div>
   </div>
@@ -295,12 +298,12 @@ function displayTeam(data){
 
   <div class="row" style="color:white">
     <div class="col s6 m6">
-      <img class="responsive-img" style="display:block; width:13vmax; height:13vmax; margin-left:50%; margin-right:auto;"  src="${ data.crestUrl}">
+      <img class="responsive-img teamImageL" src="${ data.crestUrl}">
     </div>
     <div class="col s6 m6">
       <div class="row">
         <div class="col s3 width:100%">
-          <p style="font-weight: bold; text-align: center">Short Name</p>
+          <p class="entryTextB">Short Name</p>
         </div>
         <div class="col s3 width:100%">
         <p style=" text-align: center">${data.shortName}</p>
@@ -309,16 +312,16 @@ function displayTeam(data){
 
       <div class="row">
         <div class="col s3 width:100%">
-        <p style="font-weight: bold; text-align: center">Area</p>
+        <p class="entryTextB">Area</p>
         </div>
         <div class="col s3 width:100%">
-        <p style="text-align: center">${data.area.name}</p>
+        <p class="entryText">${data.area.name}</p>
         </div>
       </div>
 
       <div class="row">
         <div class="col s3 width:100%">
-          <p style="font-weight: bold; text-align: center">TLA</p>
+          <p class="entryTextB">TLA</p>
         </div>
         <div class="col s3 width:100%">
           <p style=" text-align: center">${data.tla}</p>
@@ -327,10 +330,10 @@ function displayTeam(data){
 
       <div class="row">
         <div class="col s3 width:100%">
-          <p style="font-weight: bold; text-align: center">Founded In</p>
+          <p class="entryTextB">Founded In</p>
         </div>
         <div class="col s3 width:100%">
-          <p style="text-align: center">${data.founded}</p>
+          <p class="entryText">${data.founded}</p>
         </div>
       </div>
     </div>
@@ -340,10 +343,10 @@ function displayTeam(data){
     </div>
 
 
-    <h5 style ="color:white; font-weight: bold; text-align: center;">Contact Information  </h5>
+    <h5 class="tableTitle">Contact Information  </h5>
 
     <div class="row">
-      <div class="col s6 offset-s3" style="width:50%;">
+      <div class="col s6 offset-s3 lineDividerS">
         <hr>
       </div>
     </div>
@@ -355,7 +358,7 @@ function displayTeam(data){
     <div class="row" style="color:white">
       <div class="row">
         <div class="col s3 offset-s3 width:100%">
-          <p style="font-weight: bold; text-align: center">Website</p>
+          <p class="entryTextB">Website</p>
         </div>
         <div class="col s3 width:100%">
           <a href="${data.website}">
@@ -366,37 +369,37 @@ function displayTeam(data){
 
       <div class="row">
         <div class="col s3 offset-s3 width:100%">
-          <p style="font-weight: bold; text-align: center">Email</p>
+          <p class="entryTextB">Email</p>
         </div>
         <div class="col s3 width:100%">
-          <p style="text-align: center">${data.email}</p>
+          <p class="entryText">${data.email}</p>
         </div>
       </div>
 
       <div class="row">
         <div class="col s3 offset-s3 width:100%">
-          <p style="font-weight: bold; text-align: center">Address</p>
+          <p class="entryTextB">Address</p>
         </div>
         <div class="col s3 width:100%">
-          <p style="text-align: center">${data.address}</p>
+          <p class="entryText">${data.address}</p>
         </div>
       </div>
 
       <div class="row">
         <div class="col s3 offset-s3 width:100%">
-          <p style="font-weight: bold; text-align: center">Phone Contact</p>
+          <p class="entryTextB">Phone Contact</p>
         </div>
         <div class="col s3 width:100%">
-          <p style="text-align: center">${data.phone}</p>
+          <p class="entryText">${data.phone}</p>
         </div>
       </div>
 
       <div class="row">
         <div class="col s3 offset-s3 width:100%">
-          <p style="font-weight: bold; text-align: center">Venue</p>
+          <p class="entryTextB">Venue</p>
         </div>
         <div class="col s3 width:100%">
-          <p style="text-align: center">${data.venue}</p>
+          <p class="entryText">${data.venue}</p>
         </div>
       </div>
     </div>
@@ -466,18 +469,18 @@ function displayStandings(data){
     //console.log(team);
     resultHTML+= `
     <div class="row" style="font-size: 1vmax;" >
-      <div class="col s1 offset-s1"><p class=" text-align: center">${team.position}</p></div>
-      <a id="team-link" onclick="location.href='#teamDetails?name=${encodeURIComponent(team.team.name)}&id=${team.team.id}'; loadPage('teamDetails'); return false;">
-        <div class="col s1"><img class="responsive-img" style="display:block; width:3vmax; height:3vmax; margin-left:auto; margin-right:auto;"  src="${ team.team.crestUrl}"> <p class=" text-align: center">${team.team.name}</p></div>
+      <div class="col s1 offset-s1"><p class="entryText">${team.position}</p></div>
+      <a id="team-link" onclick="location.href='?name=${encodeURIComponent(team.team.name)}&id=${team.team.id}#teamDetails'; loadPage('teamDetails'); return false;">
+        <div class="col s1"><img class="responsive-img teamImageM" src="${ team.team.crestUrl}"> <p class="entryText">${team.team.name}</p></div>
       </a>
-      <div class="col s1"><p class=" text-align: center">${team.playedGames}</p></div>
-      <div class="col s1"><p class=" text-align: center">${team.won}</p></div>
-      <div class="col s1"><p class=" text-align: center">${team.draw}</p></div>
-      <div class="col s1"><p class=" text-align: center">${team.lost}</p></div>
-      <div class="col s1"><p class=" text-align: center">${team.goalsFor}</p></div>
-      <div class="col s1"><p class=" text-align: center">${team.goalsAgainst}</p></div>
-      <div class="col s1"><p class=" text-align: center">${team.goalDifference}</p></div>
-      <div class="col s1"><p class=" text-align: center">${team.points}</p></div>
+      <div class="col s1"><p class=" entryText>${team.playedGames}</p></div>
+      <div class="col s1"><p class=" entryText">${team.won}</p></div>
+      <div class="col s1"><p class=" entryText">${team.draw}</p></div>
+      <div class="col s1"><p class=" entryText">${team.lost}</p></div>
+      <div class="col s1"><p class=" entryText">${team.goalsFor}</p></div>
+      <div class="col s1"><p class=" entryText">${team.goalsAgainst}</p></div>
+      <div class="col s1"><p class=" entryText">${team.goalDifference}</p></div>
+      <div class="col s1"><p class=" entryText">${team.points}</p></div>
     </div>
   `;
 

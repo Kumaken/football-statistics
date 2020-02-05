@@ -122,9 +122,13 @@ function searchAndDisplayTeam(teamname) {
     if(team == undefined){ // if not found, request it, save to db, and query to indexed db again
       console.log("Requesting to API...");
 
-      let id = new URLSearchParams(new URL(window.location.href).hash.split('?')[1]).get('id');
+      // let id = new URLSearchParams(new URL(window.location.href).hash.split('?')[1]).get('id');
+      let param = new URLSearchParams(window.location.search);
+      let id = param.get('id');
 
-      console.log("ID = ", id);
+      console.log("ID = ",id);
+      //console.log("ID = ", id);
+      console.log("calling API")
       getAndSaveTeam(id).then(function(data) {
           console.log("team displayed after saving a new team data to DB");
           displayTeam(data);
@@ -161,7 +165,7 @@ function displayTeamByNameOrID(name, id){
 function displayTeamSimplified(data, favourite = false){
   let resultHTML = `
   <div class="card brown white-text team-entry">
-    <a onclick="location.href='?name=${encodeURIComponent(data.name)}&id=${data.id}${favourite ? '&saved=true' : ''}#teamDetails'; loadPage('teamDetails'); return false;">
+    <a onclick="location.href='?name=${encodeURIComponent(data.name)}&id=${data.id}${favourite ? '&saved=true' : ''}#teamDetails';">
       <div class="row" style="height: 10vmax">
         <div class="col s4 offset-s2">
           <img class="teamImageM responsive-img" src="${ data.crestUrl}">
@@ -474,7 +478,7 @@ function displayStandings(data){
     resultHTML+= `
     <div class="row" style="font-size: 1vmax;" >
       <div class="col s1 offset-s1"><p class="entryText">${team.position}</p></div>
-      <a id="team-link" onclick="location.href='?name=${encodeURIComponent(team.team.name.toLowerCase())}&id=${team.team.id}#teamDetails'; loadPage('teamDetails'); return false;">
+      <a id="team-link" onclick="location.href='?name=${encodeURIComponent(team.team.name.toLowerCase())}&id=${team.team.id}#teamDetails';">
         <div class="col s1"><img class="responsive-img teamImageM" src="${ team.team.crestUrl}"> <p class="entryText">${team.team.name}</p></div>
       </a>
       <div class="col s1"><p class=" entryText>${team.playedGames}</p></div>

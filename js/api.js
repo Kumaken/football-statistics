@@ -470,7 +470,7 @@ function displayStandings(data){
     resultHTML+= `
     <div class="row" style="font-size: 1vmax;" >
       <div class="col s1 offset-s1"><p class="entryText">${team.position}</p></div>
-      <a id="team-link" onclick="location.href='?name=${encodeURIComponent(team.team.name)}&id=${team.team.id}#teamDetails'; loadPage('teamDetails'); return false;">
+      <a id="team-link" onclick="location.href='?name=${encodeURIComponent(team.team.name.toLowerCase())}&id=${team.team.id}#teamDetails'; loadPage('teamDetails'); return false;">
         <div class="col s1"><img class="responsive-img teamImageM" src="${ team.team.crestUrl}"> <p class="entryText">${team.team.name}</p></div>
       </a>
       <div class="col s1"><p class=" entryText>${team.playedGames}</p></div>

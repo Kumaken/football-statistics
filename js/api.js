@@ -120,7 +120,11 @@ function searchAndDisplayTeam(teamname) {
   getTeamByName(teamname).then(function(team) {
     //console.log(team);
     if(team == undefined){ // if not found, request it, save to db, and query to indexed db again
-      let id = new URLSearchParams(new URL(window.location.href).hash.split('?')[1]).get('id')
+      console.log("Requesting to API...");
+
+      let id = new URLSearchParams(new URL(window.location.href).hash.split('?')[1]).get('id');
+
+      console.log("ID = ", id);
       getAndSaveTeam(id).then(function(data) {
           console.log("team displayed after saving a new team data to DB");
           displayTeam(data);
